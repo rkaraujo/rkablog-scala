@@ -1,0 +1,25 @@
+@import java.time.Year
+
+<div>
+    <h1>Renato K. Araujo</h1>
+    <p>
+        I am a Software Engineer with @(Year.now().getValue() - 2003) years of professional experience in developing web applications and websites, mostly using Java.
+        I consider myself a generalist developer and began as a full stack Java programmer, but in the last six years I am working more with backend software and web services in a high audience website.
+        I am also a Certified Java Programmer and have some experience configuring Linux servers.
+    </p>
+
+    <div id="links">
+        <ul class="list-unstyled">
+            <li><a href="http://renato.software/resume.html"><img src="@routes.Assets.versioned("images/resume.png")" /></a> <a href="@routes.ResumeController.resume()">Resume | CV</a></li>
+            <li><a href="https://www.linkedin.com/in/rkaraujo/en" target="_blank"><img src="@routes.Assets.versioned("images/linkedin.png")" /></a> <a href="https://www.linkedin.com/in/rkaraujo/en" target="_blank">Linkedin</a></li>
+            <li><a href="https://github.com/rkaraujo/" target="_blank"><img src="@routes.Assets.versioned("images/github.png")" /></a> <a href="https://github.com/rkaraujo/" target="_blank">Github</a></li>
+            <li><a href="https://twitter.com/rkaraujo" target="_blank"><img src="@routes.Assets.versioned("images/twitter.png")" /></a> <a href="https://twitter.com/rkaraujo" target="_blank">Twitter</a></li>
+        </ul>
+
+        <h3>Personal Projects</h3>
+        <ul class="list-unstyled">
+            <li><a href="http://www.achajogobarato.com.br" target="_blank">Acha Jogo Barato</a></li>
+            <li><a href="http://www.celularbombarato.com.br" target="_blank">Celular Bom Barato</a></li>
+        </ul>
+    </div>
+</div>

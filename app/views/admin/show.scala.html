@@ -1,0 +1,3 @@
+@()(implicit flash: Flash)
+
+@flash.get("message").getOrElse("Nao achou a mensagem")

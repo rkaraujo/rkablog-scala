@@ -1,0 +1,9 @@
+html, body, .container, .row {
+	height: 100%;
+}
+
+@media (min-width: 992px) {
+	#content {
+		min-height: 100%;
+	}
+}

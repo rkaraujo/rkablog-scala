@@ -1,0 +1,97 @@
+body {
+	background-color: #E6E6E6;
+}
+
+h1, h2, h3, h4, h5, h6, p, li {
+	color: #444;
+}
+
+.post-summary {
+	margin-top: 35px;
+}
+
+.post-summary h2 {
+	margin-top: 35px;
+}
+
+.btn-post {
+	background-color: #AAA;
+	border-color: #AAA;
+	color: #FFF;
+}
+
+.btn-post:hover{
+	background-color: #666;
+	color: #FFF;
+	text-decoration: none;
+}
+
+.btn-custom {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 0.85em;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+
+#content {
+	background-color: #FAFAFA;
+	border-right: 1px solid #CCC;
+	border-left: 1px solid #CCC;
+	padding-bottom: 30px;
+}
+
+#side {
+	background-color: #555;
+	padding-bottom: 30px;
+}
+
+#side h1, #side h3 {
+	color: orange;
+}
+
+#side p {
+	color: #CCC;
+}
+
+#side a {
+	color: #EEE;
+}
+
+#post-title {
+	padding-bottom: 20px;
+}
+
+#post-content > p {
+	padding-bottom: 15px;
+}
+
+@media (max-width: 991px) {
+	h1, h2, h3, h4, h5, h6 {
+		margin-top: 0;
+	}
+	
+	#content, #side {
+		padding-top: 20px;
+	}
+}
+
+@media (min-width: 992px) {
+	.resume-info {
+		padding-top: 20px;
+	}
+}

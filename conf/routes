@@ -1,0 +1,19 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET     /                           controllers.HomeController.index(page: Int ?= 0)
+GET     /index.html                 controllers.HomeController.index(page: Int ?= 0)
+
+GET     /p/$slugTitle<.+>.html          controllers.PostController.show(slugTitle: String)
+
+GET     /resume.html                controllers.ResumeController.resume
+
+GET     /admin/login.html           controllers.admin.AdminAuthenticationController.showLogin
+POST    /admin/login.html           controllers.admin.AdminAuthenticationController.login
+
+GET     /admin/show.html            controllers.admin.AdminPostController.show
+GET     /admin/post.html            controllers.admin.AdminPostController.save
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

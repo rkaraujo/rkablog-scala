@@ -1,0 +1,56 @@
+@import app.models.Tables.PostsRow
+@import util.Summarizator.summarize
+
+@(posts: Seq[PostsRow], newerPage: Option[Int], olderPage: Option[Int])
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Blog - Renato K. Araujo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="@routes.Assets.versioned("lib/bootstrap/css/bootstrap.min.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/blog.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/typography.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/height.css")">
+        <script src="@routes.Assets.versioned("lib/jquery/jquery.min.js")"></script>
+        <script src="@routes.Assets.versioned("lib/bootstrap/js/bootstrap.min.js")"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+
+                <div id="content" class="col-md-8">
+                    <h3>小阪 Renato Blog</h3>
+
+                    <div class="post-summary">
+                        @for(post <- posts) {
+                            <h2>@post.title <small>- @post.publishedAt.get.format("dd MMM yyyy")</small></h2>
+                            <p>@summarize(post.content, 460)</p>
+                            <a href="/p/@(post.slugTitle).html" class="btn-custom btn-post">Continue Reading</a>
+                        }
+                    </div>
+
+                    <nav>
+                        <ul class="pager">
+                            @if(!olderPage.isEmpty) {
+                                <li class="previous"><a href="@routes.HomeController.index(olderPage.get)"><span aria-hidden="true">&larr;</span>
+                                    Older</a></li>
+                            }
+                            @if(!newerPage.isEmpty) {
+                                <li class="next"><a href="@routes.HomeController.index(newerPage.get)">
+                                    Newer <span aria-hidden="true">&rarr;</span></a></li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+
+                <div id="side" class="col-md-4">@sidebar()</div>
+
+            </div>
+        </div>
+    </body>
+
+</html>

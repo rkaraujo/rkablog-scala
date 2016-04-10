@@ -1,0 +1,26 @@
+@import controllers.admin.LoginData
+
+@(loginForm: Form[LoginData])(implicit messages: Messages)
+
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+
+    <body>
+        @if(loginForm.hasGlobalErrors) {
+            <ul>
+            @for(error <- loginForm.globalErrors) {
+                <li>@error.message</li>
+            }
+            </ul>
+        }
+
+        @helper.form(action = controllers.admin.routes.AdminAuthenticationController.login()) {
+            @helper.inputText(loginForm("username"), '_label -> "Username:")
+            @helper.inputPassword(loginForm("password"), '_label -> "Password:")
+            <input type="submit" value="Login">
+        }
+    </body>
+
+</html>
