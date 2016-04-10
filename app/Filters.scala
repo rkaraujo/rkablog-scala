@@ -3,7 +3,6 @@ import javax.inject._
 import play.api._
 import play.api.http.HttpFilters
 import play.api.mvc._
-import filters.ExampleFilter
 import play.filters.gzip.GzipFilter
 
 import akka.stream.Materializer
@@ -20,13 +19,11 @@ import play.api.libs.concurrent.Execution.Implicits._
  * the `application.conf` configuration file.
  *
  * @param env Basic environment settings for the current application.
- * @param exampleFilter A demonstration filter that adds a header to
  * each response.
  */
 @Singleton
 class Filters @Inject() (
-  env: Environment,
-  exampleFilter: ExampleFilter) (implicit val mat: Materializer) extends HttpFilters {
+  env: Environment) (implicit val mat: Materializer) extends HttpFilters {
 
   override val filters = {
     // Use the example filter if we're running development mode. If
@@ -35,7 +32,7 @@ class Filters @Inject() (
     val gzipFilter = new GzipFilter(shouldGzip = (request, response) =>
       response.body.contentType.exists(_.startsWith("text/html")))
 
-    if (env.mode == Mode.Dev) Seq(exampleFilter, gzipFilter) else Seq(gzipFilter)
+    Seq(gzipFilter)
   }
 
 }

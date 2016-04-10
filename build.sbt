@@ -21,3 +21,7 @@ libraryDependencies += "com.typesafe.slick" %% "slick-codegen" % "3.1.1"
 libraryDependencies += "de.svenkubiak" % "jBCrypt" % "0.4.1"
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
+
+sources in (Compile, doc) := Seq.empty
+
+publishArtifact in (Compile, packageDoc) := false

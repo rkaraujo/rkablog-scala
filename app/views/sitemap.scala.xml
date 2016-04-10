@@ -1,0 +1,9 @@
+@(urls: List[String])(implicit request: RequestHeader)
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    @for(url <- urls) {
+        <url>
+            <loc>@("http://" + request.domain + url)</loc>
+        </url>
+    }
+</urlset>
