@@ -1,0 +1,46 @@
+@import app.models.Tables.PostsRow
+
+@(posts: Seq[PostsRow])(implicit flash: Flash)
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Posts List</title>
+    <link rel="stylesheet" href="@routes.Assets.versioned("lib/bootstrap/css/bootstrap.min.css")">
+</head>
+
+<body>
+    <h1>Posts List</h1>
+
+    @if(flash.get("message").isDefined) {
+        <p><span class="label label-success">@flash.get("message")</span></p>
+    }
+
+    <table class="table">
+        <thead>
+            <th>Title</th>
+            <th>Publication Date</th>
+            <th>Creation Date</th>
+            <th>Publish</th>
+            <th>Edit</th>
+        </thead>
+        @for(post <- posts) {
+            <tr>
+                <td>@post.title</td>
+                <td>@post.publishedAt.map(_.format("dd-MM-yyyy")).getOrElse("")</td>
+                <td>@post.createdAt.format("dd-MM-yyyy")</td>
+                <td>
+                    @if(post.publishedAt.isEmpty) {
+                        <a href="@controllers.admin.routes.AdminPostController.publish(post.id.get)">Publish</a>
+                    }
+                </td>
+                <td><a href="@controllers.admin.routes.AdminPostController.show(post.id.get.toString)">Edit</a></td>
+            </tr>
+        }
+    </table>
+
+    <a class="btn btn-primary" href="@controllers.admin.routes.AdminPostController.show()" role="button">Create Post</a>
+</body>
+
+</html>

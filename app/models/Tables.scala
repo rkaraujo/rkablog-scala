@@ -27,11 +27,11 @@ trait Tables {
    *  @param title Database column title SqlType(VARCHAR), Length(255,true)
    *  @param updatedAt Database column updated_at SqlType(DATETIME)
    *  @param pageDescription Database column page_description SqlType(VARCHAR), Length(255,true), Default(None) */
-  case class PostsRow(id: Int, content: String, createdAt: java.sql.Timestamp, publishedAt: Option[java.sql.Date] = None, slugTitle: String, title: String, updatedAt: java.sql.Timestamp, pageDescription: Option[String] = None)
+  case class PostsRow(id: Option[Int], content: String, createdAt: java.sql.Timestamp, publishedAt: Option[java.sql.Date] = None, slugTitle: String, title: String, updatedAt: java.sql.Timestamp, pageDescription: Option[String] = None)
   /** GetResult implicit for fetching PostsRow objects using plain SQL queries */
-  implicit def GetResultPostsRow(implicit e0: GR[Int], e1: GR[String], e2: GR[java.sql.Timestamp], e3: GR[Option[java.sql.Timestamp]], e4: GR[Option[String]]): GR[PostsRow] = GR{
+  implicit def GetResultPostsRow(implicit e0: GR[Option[Int]], e1: GR[String], e2: GR[java.sql.Timestamp], e3: GR[Option[java.sql.Timestamp]], e4: GR[Option[String]]): GR[PostsRow] = GR{
     prs => import prs._
-    PostsRow.tupled((<<[Int], <<[String], <<[java.sql.Timestamp], <<?[java.sql.Date], <<[String], <<[String], <<[java.sql.Timestamp], <<?[String]))
+    PostsRow.tupled((<<?[Int], <<[String], <<[java.sql.Timestamp], <<?[java.sql.Date], <<[String], <<[String], <<[java.sql.Timestamp], <<?[String]))
   }
   /** Table description of table posts. Objects of this class serve as prototypes for rows in queries. */
   class Posts(_tableTag: Tag) extends Table[PostsRow](_tableTag, "posts") {
@@ -40,7 +40,7 @@ trait Tables {
     def ? = (Rep.Some(id), Rep.Some(content), Rep.Some(createdAt), publishedAt, Rep.Some(slugTitle), Rep.Some(title), Rep.Some(updatedAt), pageDescription).shaped.<>({r=>import r._; _1.map(_=> PostsRow.tupled((_1.get, _2.get, _3.get, _4, _5.get, _6.get, _7.get, _8)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
     /** Database column id SqlType(INT), AutoInc, PrimaryKey */
-    val id: Rep[Int] = column[Int]("id", O.AutoInc, O.PrimaryKey)
+    val id: Rep[Option[Int]] = column[Option[Int]]("id", O.AutoInc, O.PrimaryKey)
     /** Database column content SqlType(TEXT) */
     val content: Rep[String] = column[String]("content")
     /** Database column created_at SqlType(DATETIME) */

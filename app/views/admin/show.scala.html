@@ -1,3 +1,42 @@
-@()(implicit flash: Flash)
+@import controllers.admin.PostData
+@import util._
 
-@flash.get("message").getOrElse("Nao achou a mensagem")
+@(postForm: Form[PostData])(implicit messages: Messages)
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Post</title>
+        <link rel="stylesheet" href="@routes.Assets.versioned("lib/bootstrap/css/bootstrap.min.css")">
+        <script src="@routes.Assets.versioned("lib/ckeditor/full/ckeditor.js")"></script>
+    </head>
+
+    <body>
+        <h1>Edit Post</h1>
+
+        @helper.form(action = controllers.admin.routes.AdminPostController.save()) {
+            @helper.input(postForm("id")) { (id, name, value, args) =>
+                <input type="hidden" name="@name" id="@id" value="@value" @toHtmlArgs(args)>
+            }
+
+            @helper.inputText(postForm("title"), '_label -> "Title:", 'class -> "form-control", '_showConstraints -> false)
+
+            <textarea id="content" name="content" rows="25" cols="80">
+            @Html(postForm("content").value.getOrElse(""))
+            </textarea>
+
+            @helper.inputText(postForm("pageDescription"), '_label -> "Description:", 'class -> "form-control", '_showConstraints -> false)
+
+            <input class="btn btn-primary" type="submit" value="Save">
+            <a class="btn btn-default" href="@controllers.admin.routes.AdminPostController.list()" role="button">Back</a>
+        }
+
+        <script>
+            CKEDITOR.replace('content', {
+                height: 400
+            });
+        </script>
+    </body>
+
+
+</html>

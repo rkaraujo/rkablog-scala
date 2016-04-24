@@ -1,5 +1,6 @@
 import javax.inject.Inject
 
+import play.api.{Environment, Mode}
 import play.api.http._
 import play.api.mvc._
 import play.api.routing.Router
@@ -10,7 +11,7 @@ import play.api.cache._
  */
 class RequestHandler @Inject()(router: Router,
                                errorHandler: HttpErrorHandler, configuration: HttpConfiguration, filters: HttpFilters
-  ) (cache: CacheApi) extends DefaultHttpRequestHandler(router, errorHandler, configuration, filters) {
+  ) (cache: CacheApi) (env: Environment) extends DefaultHttpRequestHandler(router, errorHandler, configuration, filters) {
 
   def validSessionCookie(authCookieValue: String): Boolean = {
     val splitted = authCookieValue.split(":")
@@ -35,6 +36,10 @@ class RequestHandler @Inject()(router: Router,
   }
 
   override def routeRequest(request: RequestHeader): Option[Handler] = {
+    if (env.mode == Mode.Dev) {
+      return super.routeRequest(request)
+    }
+
     if (!request.uri.startsWith("/admin/") || request.uri == "/admin/login.html") {
       return super.routeRequest(request)
     }

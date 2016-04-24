@@ -12,8 +12,12 @@ GET     /resume.html                controllers.ResumeController.resume
 GET     /admin/login.html           controllers.admin.AdminAuthenticationController.showLogin
 POST    /admin/login.html           controllers.admin.AdminAuthenticationController.login
 
-GET     /admin/show.html            controllers.admin.AdminPostController.show
-GET     /admin/post.html            controllers.admin.AdminPostController.save
+GET     /admin/list.html            controllers.admin.AdminPostController.list
+
+GET     /admin/publish.html         controllers.admin.AdminPostController.publish(id: Int)
+
+GET     /admin/post.html            controllers.admin.AdminPostController.show(id ?= null)
+POST    /admin/post.html            controllers.admin.AdminPostController.save
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

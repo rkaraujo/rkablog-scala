@@ -9,7 +9,11 @@
     <head>
         <meta charset="utf-8">
         <title>@post.title</title>
-        <meta name="description" content="@post.pageDescription">
+        @if(post.pageDescription == None) {
+            <meta name="description" content="@post.title">
+        } else {
+            <meta name="description" content="@post.pageDescription">
+        }
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("lib/bootstrap/css/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/blog.css")">
@@ -25,7 +29,7 @@
 
                 <div id="content" class="col-md-8">
                     <h2 id="post-title">@post.title <small>- @post.publishedAt.get.format("dd MMM yyyy")</small></h2>
-                    <div id="post-content">@Html(NewLineToHtmlConverter.convert(post.content))</div>
+                    <div id="post-content">@Html(post.content)</div>
                     <a href="@routes.HomeController.index()" class="btn-custom btn-post">Back to Blog Index</a>
                 </div>
 

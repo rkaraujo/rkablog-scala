@@ -25,11 +25,11 @@ class AdminAuthenticationController @Inject() (val messagesApi: MessagesApi, cac
     ) (LoginData.apply) (LoginData.unapply)
   )
 
-  def showLogin = Action {
+  def showLogin() = Action {
     Ok(views.html.admin.login(loginForm))
   }
 
-  def login = Action(parse.form(loginForm, onErrors = (formWithErrors: Form[LoginData]) => BadRequest(views.html.admin.login(formWithErrors)))) { implicit request =>
+  def login() = Action(parse.form(loginForm, onErrors = (formWithErrors: Form[LoginData]) => BadRequest(views.html.admin.login(formWithErrors)))) { implicit request =>
     val loginData = request.body
 
     var message = "nao logado"

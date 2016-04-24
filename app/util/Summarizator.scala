@@ -3,7 +3,12 @@ package util
 object Summarizator {
 
   def summarize(text: String, maxLength: Int): String = {
-    val firstParagraph: String = text.split("\\n")(0)
+    val firstParagraphStart = text.indexOf("<p>")
+    val firstParagraphEnd = text.indexOf("</p>")
+    if (firstParagraphStart < 0 || firstParagraphEnd < 0 ) {
+      return "Text"
+    }
+    val firstParagraph: String = text.substring(firstParagraphStart + 3, firstParagraphEnd)
     if (firstParagraph.length < maxLength) {
       return firstParagraph
     }

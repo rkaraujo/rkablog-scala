@@ -13,7 +13,8 @@ libraryDependencies ++= Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.0-RC1" % Test,
   "mysql" % "mysql-connector-java" % "5.1.38",
   "com.typesafe.play" %% "play-slick" % "2.0.0",
-  "org.webjars" % "bootstrap" % "3.3.6"
+  "org.webjars" % "bootstrap" % "3.3.6",
+  "org.webjars" % "ckeditor" % "4.5.8"
 )
 
 libraryDependencies += filters
