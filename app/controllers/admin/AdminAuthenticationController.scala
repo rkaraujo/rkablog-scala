@@ -32,8 +32,6 @@ class AdminAuthenticationController @Inject() (val messagesApi: MessagesApi, cac
   def login() = Action(parse.form(loginForm, onErrors = (formWithErrors: Form[LoginData]) => BadRequest(views.html.admin.login(formWithErrors)))) { implicit request =>
     val loginData = request.body
 
-    var message = "nao logado"
-
     val isUsernamePasswordValid: Boolean = CheckUsersFile.checkUsernamePassword(loginData.username, loginData.password)
     if (isUsernamePasswordValid) {
 
@@ -42,7 +40,7 @@ class AdminAuthenticationController @Inject() (val messagesApi: MessagesApi, cac
 
       val authCookieValue = loginData.username + ":" + userSession
 
-      Redirect(routes.AdminPostController.show()).flashing("message" -> message).withCookies(Cookie("AUTH", authCookieValue))
+      Redirect(routes.AdminPostController.list()).withCookies(Cookie("AUTH", authCookieValue))
     } else {
       Redirect(routes.AdminAuthenticationController.showLogin())
     }

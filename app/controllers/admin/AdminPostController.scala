@@ -70,7 +70,7 @@ class AdminPostController @Inject() (val messagesApi: MessagesApi, dbConfigProvi
           val postRow = PostsRow(dbPost.id, post.content, dbPost.createdAt, dbPost.publishedAt, Slugfier.slugfy(post.title), post.title, new Timestamp(System.currentTimeMillis()), post.pageDescription)
           dbConfig.db.run(Tables.Posts.filter(_.id === dbPost.id).update(postRow)).map(_ -> ())
         }
-        Redirect("/admin/post.html?id=1").flashing("message" -> "Post saved")
+        Redirect("/admin/list.html").flashing("message" -> "Post saved")
       }
     )
   }
